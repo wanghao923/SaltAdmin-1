@@ -157,7 +157,6 @@ class IndexHandler(BaseHandler):
             'login_time': self.format_time(self.session.get('login_time')),
             'login_ip': self.session.get('login_ip'),
             'login_ua': self.session.get('login_ua'),
-            #'uptime': format_timestamp(Local.local_uptime()),
             'uptime': Local.local_uptime(),
             'ip':ip,
             'hostname':platform.node(),

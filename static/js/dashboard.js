@@ -12,7 +12,6 @@ function get_minion_data(){
            $("#keys_ok").html(msg['keys_ok']);
            $("#keys_pre").html(msg['keys_pre']);
            $("#keys_rej").html(msg['keys_rej']);
-           //alert(msg);
         },
     error:function(){ 
           alert("提示：数据加载失败！");
