@@ -14,14 +14,17 @@
     <!--<link href="static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />-->
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="{{ static_url('css/components.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
     <!--<link href="static/css/plugins.min.css" rel="stylesheet" type="text/css" />-->
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="{{ static_url('css/layout.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ static_url('css/saltadmin.css') }}" rel="stylesheet" type="text/css" />
     {% block head %}{% endblock %}
+    <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/dashboard.js"></script>
 </head>
-<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+<body "class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
     <div class="page-wrapper">
         <!-- BEGIN HEADER -->
         {% include "layout/top.html" %}

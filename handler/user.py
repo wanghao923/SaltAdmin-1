@@ -8,7 +8,7 @@ from tornado.web import authenticated as Auth
 from model.models import User
 
 class UserHandler(BaseHandler):
-    @Auth
+    #@Auth
     def get(self):
         page = int(self.get_argument('page', 1))
         line = int(self.get_argument('line', 50))
@@ -86,12 +86,12 @@ class LogoutHandler(BaseHandler):
 
 # 我的资料
 class ProfileHandler(BaseHandler):
-    @Auth
+    #@Auth
     def get(self):
         profile = self.db.query(User).filter_by(id=self.uid).first()
         self.render('user/profile.html',profile=profile)
 
-    @Auth
+    #@Auth
     def post(self):
         data = {
             "nickname": self.get_argument("nickname", None),
@@ -114,6 +114,6 @@ class ProfileHandler(BaseHandler):
 
 # 修改密码
 class PasswdHandler(BaseHandler):
-    @Auth
+    #@Auth
     def get(self):
         self.render('user/passwd.html')

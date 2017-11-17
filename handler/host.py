@@ -21,7 +21,7 @@ def get_groups(db):
 
 
 class IndexHandler(BaseHandler):
-    @Auth
+    #@Auth
     def get(self):
         page = int(self.get_argument('page',1))
         line = int(self.get_argument('line',100))
@@ -36,12 +36,12 @@ class IndexHandler(BaseHandler):
 
 
 class GroupHandler(BaseHandler):
-    @Auth
+    #@Auth
     def get(self):
         data = get_groups(self.db)
         self.render('host/group.html',data=data)
 
-    @Auth
+    #@Auth
     def post(self):
         gid = self.get_argument('gid',None)
         name = self.get_argument('name',None)
@@ -98,7 +98,7 @@ class GroupHandler(BaseHandler):
 
 
 class CreateHostHandler(BaseHandler):
-    @Auth
+    #@Auth
     def get(self):
         groups = get_groups(self.db)
         saltmaster = self.db.query(SaltMaster).all()
@@ -106,7 +106,7 @@ class CreateHostHandler(BaseHandler):
             saltmaster = [{'id':0,'hostname':u'请先添加SaltMaster'}]
         self.render('host/create_host.html',groups=groups,saltmaster=saltmaster)
 
-    @Auth
+    #@Auth
     def post(self):
         data = {
             'hostname': self.get_argument('hostname',None),
@@ -147,7 +147,7 @@ class CreateHostHandler(BaseHandler):
 
 # 主机详情
 class HostDetailHandler(BaseHandler):
-    @Auth
+    #@Auth
     def get(self):
         hid = self.get_argument("hid",None)
         groups = get_groups(self.db)
@@ -157,7 +157,7 @@ class HostDetailHandler(BaseHandler):
             saltmaster = [{'id':0,'hostname':u'请先添加SaltMaster'}]
         self.render('host/host_detail.html',data=data,groups=groups,saltmaster=saltmaster)
 
-    @Auth
+    #@Auth
     def post(self):
         hid = self.get_argument('hid', None)
         data = {

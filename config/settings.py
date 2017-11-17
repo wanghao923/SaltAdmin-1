@@ -16,9 +16,9 @@ config = {
     'db': {
         'host': '127.0.0.1',
         'port': 3306,
-        'db': 'saltadmin2',
-        'user': 'test',
-        'passwd': 'test',
+        'db': 'saltadmin',
+        'user': 'root',
+        'passwd': 'Bestv001!',
         'charset': 'utf8'
     },
     'redis': {

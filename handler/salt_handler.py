@@ -4,6 +4,9 @@
 
 from BaseHandler import BaseHandler
 from model.models import SaltMaster
+import json
+import salt
+import salt.key
 from tornado.web import authenticated as Auth
 from model.models import or_
 
@@ -11,12 +14,12 @@ from model.models import or_
 # Salt-Master管理
 class MasterHandler(BaseHandler):
 
-    @Auth
+    #@Auth
     def get(self):
         data = self.db.query(SaltMaster).all()
         self.render('salt/master.html',data=data)
 
-    @Auth
+    #@Auth
     def post(self):
         f = self.get_argument('f', None)
         _id = self.get_argument('id', None)
@@ -70,10 +73,29 @@ class MasterHandler(BaseHandler):
 
 
 
-# Salt-Key管理
 class KeyHandler(BaseHandler):
 
-    @Auth
+    #@Auth
     def get(self):
         data = self.db.query(SaltMaster).all()
         self.render('salt/key.html',data=data)
+
+class MinionHandler(BaseHandler):
+    def salt_minions(self):
+        __opts__ = salt.config.client_config('/etc/salt/master')
+        mykey = salt.key.Key(__opts__)
+        K = mykey.list_keys()
+        keys_ok = len(K['minions'])
+        keys_rej = len(K['minions_rejected'])
+        keys_pre = len(K['minions_pre'])
+        local = salt.client.LocalClient()
+        rt = local.cmd('*','test.ping',timeout=1)
+        minions_online = len(rt)
+        sm = {'keys_ok':keys_ok, 'keys_rej':keys_rej, 'keys_pre':keys_pre, 'online':minions_online, 'offline':keys_ok-minions_online}
+        return sm
+
+    def get(self):
+        rt_data = {}
+        rt_data.update(self.salt_minions())
+        return json.dumps(rt_data)
+

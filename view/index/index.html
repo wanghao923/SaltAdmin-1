@@ -10,15 +10,144 @@
         <div class="page-toolbar pull-right" style="margin-top:5px;">{{ handler.format_time(handler.time) }}</div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-sm-12">
-            <p>SaltAdmin: {{ data['saltadmin'] }}</p>
-            <p>SaltStack: {{ data['saltstack'] }}</p>
-            <p>Tornado: {{ data['tornado'] }}</p>
-            <p>上次登录时间: {{ data['login_time'] }}</p>
-            <p>上次登录IP: {{ data['login_ip'] }}</p>
-            <p>上次登录UA: {{ data['login_ua'] }}</p>
-        </div>
+    <div class="wrapper">
+        <!-- Left column/section -->
+        <section class="column width6 first">
+            <div class="colgroup leading">
+                <div class="column width3 first">
+                    <h3>欢迎回来, <a href="/users/edit?id=${MyData['SID']}">{{ data['saltadmin'] }}</a></h3>
+                    <p>
+                        SaltStack Admin <b>Beta</b>. Design By Luxiaok.<br />
+                        <a href="/dashboard">建议</a> | <a href="/dashboard">Bug</a> | <a href="/dashboard">加入开发</a>
+                    </p>
+                </div>
+                <div class="column width3">
+                    <h4>上次登录</h4>
+                    <p>
+                        登录时间：{{ data['login_time'] }}
+                    </p>
+                </div>
+            </div>
+            <div class="colgroup leading">
+                <div class="column width3 first">
+                    <h4>基本信息</h4>
+                    <hr/>
+                    <table class="no-style full">
+                        <tbody>
+                            <tr>
+                                <td>主机名</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">{{ data.hostname }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>IP地址</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">{{ data.ip }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>操作系统</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">{{ data.os }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>服务器型号</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">{{ data.Manufacturer}} {{ data.Product_Name }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>SaltStack</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">{{ data.salt_version }}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="column width3">
+                    <h4>运行状态</h4>
+                    <hr/>
+                    <table class="no-style full">
+                        <tbody>
+                            <tr>
+                                <td>系统负载</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">1分钟：{{ data.loadavg_1 }} | 5分钟：{{ data.loadavg_5 }} | 15分钟：{{ data.loadavg_15 }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>进程数量</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">总进程数：{{ data.process_num }} | 运行：1 | 睡眠：{{ data.process_num }} | 僵尸：0</a></td>
+                            </tr>
+                            <tr>
+                                <td>登录用户</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">{{ data.login_user_num }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>网络流量</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">流出：{{ data.net_out }} MB | 流入：{{ data.net_in }} MB</a></td>
+                            </tr>
+                            <tr>
+                                <td>运行时间</td>
+                                <td class="ta-right"><a href="javascript:void(0) ">{{ data.uptime }}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="colgroup leading">
+                <div class="column width3 first">
+                    <h4>系统资源</h4>
+                    <hr/>
+                    <table class="no-style full">
+                         <tbody>
+                             <tr>
+                                  <td>CPU</td>
+                                  <td class="ta-right">{{ data.cpu_physical_num }} x {{ data.cpu_logical_cores }} Cores</td>
+                                  <td><div id="cpu" class="progress full progress-green"><span><b></b></span></div></td>
+                             </tr>
+                             <tr>
+                                 <td>硬盘</td>
+                                 <td class="ta-right">{{ data.disk_used }} / {{ data.disk_all }} GB</td>
+                                 <td><div id="disk" class="progress full progress-blue"><span><b></b></span></div></td>
+                             </tr>
+                             <tr>
+                                 <td>内存</td>
+                                 <td class="ta-right">{{ data.mem_used }} / {{ data.mem_total }} MB</td>
+                                 <td><div id="mem" class="progress full progress-red"><span><b></b></span></div></td>
+                             </tr>
+                         </tbody>
+                    </table>
+                </div>
+                <div class="column width3">
+                    <h4>网络带宽</h4>
+                    <hr/>
+                    <div id="placeholder" style="height:120px"></div>
+                </div>
+            </div>
+            <div class="clear">&nbsp;</div>
+        </section>
+        <aside class="column width2">
+            <div id="rightmenu">
+                <header>
+                    <h3>SaltStack状态</h3>
+                </header>
+                <dl class="first">
+                    <dt><img width="16" height="16" alt="" src="/static/img/icon/information.png"></dt>
+                    <dd><b>Minions状态</b></dd>
+                    <dd class="last"><b>总数量： </b><span id="minions_all">Loading ...</span><br /><font color='green'><b>在　线：</b><span id="minions_online">Loading ...</span></font><br /><font color='red'><b>离　线： </b><span id="minions_down">Loading ...</span></font></dd>
+                    <dt><img width="16" height="16" alt="" src="/static/img/icon/key.png"></dt>
+                    <dd><b>Key认证状态</b></dd>
+                    <dd class="last"><b>已认证： </b><span id="keys_ok">Loading ...</span><br /><font color='green'><b>未认证： </b><span id="keys_pre">Loading ...</span></font><br /><font color='red'><b>已拒绝： </b><span id="keys_rej">Loading ...</span></font></dd>
+                </dl>
+            </div>
+            <div class="content-box">
+                <header>
+                    <h3>系统消息</h3>
+                </header>
+                <section>
+                    <dl>
+                        <dt>SaltStack</dt>
+                        <dd>1.有1台主机重启完毕<br />
+                        2.SaltStack有更新<br /></dd>
+                        <br />
+                        <dt>监控消息</dt>
+                        <dd>1.有1台主机<font color='red'>宕机</font></dd>
+                    </dl>
+                </section>
+            </div>
+        </aside>
     </div>
 </div>
 {% endblock %}

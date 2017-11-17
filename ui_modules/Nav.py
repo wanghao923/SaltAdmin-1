@@ -94,29 +94,29 @@ class Nav:
                 }
             ]
         },
-        {
-            'url': url_none,
-            'name': u'页面管理',
-            'icon': 'icon-grid',
-            'sub': [
-                {
-                    'url': '/page/404.html',
-                    'name': u'404页面',
-                    'icon': 'icon-bulb'
-                },
-                {
-                    'url': '/page/blank.html',
-                    'name': u'空白页面',
-                    'icon': 'icon-bar-chart'
-                }
-                ,
-                {
-                    'url': '/user/login',
-                    'name': u'登录页面',
-                    'icon': 'icon-bulb'
-                }
-            ]
-        },
+        #{
+        #    'url': url_none,
+        #    'name': u'页面管理',
+        #    'icon': 'icon-grid',
+        #    'sub': [
+        #        {
+        #            'url': '/page/404.html',
+        #            'name': u'404页面',
+        #            'icon': 'icon-bulb'
+        #        },
+        #        {
+        #            'url': '/page/blank.html',
+        #            'name': u'空白页面',
+        #            'icon': 'icon-bar-chart'
+        #        }
+        #        ,
+        #        {
+        #            'url': '/user/login',
+        #            'name': u'登录页面',
+        #            'icon': 'icon-bulb'
+        #        }
+        #    ]
+        #},
         {
             'url': url_none,
             'name': u'关于',
