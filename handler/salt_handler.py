@@ -77,3 +77,10 @@ class KeyHandler(BaseHandler):
     def get(self):
         data = self.db.query(SaltMaster).all()
         self.render('salt/key.html',data=data)
+
+class MinionHandler(BaseHandler):
+
+    #@Auth
+    def get(self):
+        msg = {"keys_ok":1, "online": 1, "offline":0, "keys_ok":1, "keys_pre":0, "keys_rej":0}
+        return self.jsonReturn(msg)

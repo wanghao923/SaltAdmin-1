@@ -22,6 +22,7 @@ route = [
     (r'/user',user.UserHandler),
     (r'/salt/master',salt_handler.MasterHandler),
     (r'/salt/key',salt_handler.KeyHandler),
+    (r'/salt/minion',salt_handler.MinionHandler),
     (r'/page/404.html',page.Page404Handler),
     (r'/page/blank.html',page.BlankHandler),
     (r'/test',test.TestHandler),
